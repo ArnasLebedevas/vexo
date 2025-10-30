@@ -1,0 +1,6 @@
+@Vexo.Api_HostAddress = http://localhost:5274
+
+GET {{Vexo.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
