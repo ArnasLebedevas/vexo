@@ -12,4 +12,8 @@
     <PackageReference Include="MediatR" Version="13.1.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\Vexo.Domain\Vexo.Domain.csproj" />
+  </ItemGroup>
+
 </Project>

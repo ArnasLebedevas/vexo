@@ -21,7 +21,6 @@ internal class ExceptionMiddleware(RequestDelegate next, ILogger<ExceptionMiddle
             logger.LogError(ex, "Unhandled exception: {Message}", ex.Message);
 
             var result = ExceptionMapper.Map(ex);
-
             var statusCode = HttpStatusMapper.Map(result.ErrorType);
 
             context.Response.ContentType = "application/json";

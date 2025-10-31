@@ -17,6 +17,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Vexo.Application\Vexo.Application.csproj" />
     <ProjectReference Include="..\Vexo.Domain\Vexo.Domain.csproj" />
   </ItemGroup>
 

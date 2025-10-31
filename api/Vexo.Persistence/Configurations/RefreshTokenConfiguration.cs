@@ -9,8 +9,18 @@ internal sealed class RefreshTokenConfiguration : IEntityTypeConfiguration<Refre
     public void Configure(EntityTypeBuilder<RefreshToken> builder)
     {
         builder.HasKey(rt => rt.Id);
-        builder.Property(rt => rt.Token).IsRequired();
+
+        builder.Property(rt => rt.Token)
+               .HasMaxLength(128)
+               .IsRequired();
+
+        builder.Property(rt => rt.ReplacedByToken)
+               .HasMaxLength(128)
+               .IsRequired(false);
+
         builder.HasIndex(rt => rt.Token).IsUnique();
+        builder.HasIndex(rt => rt.AppUserId);
+        builder.HasIndex(rt => new { rt.Token, rt.IsRevoked });
 
         builder.HasOne(rt => rt.AppUser)
                .WithMany(u => u.RefreshTokens)

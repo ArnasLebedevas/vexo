@@ -1,5 +1,9 @@
+using Microsoft.AspNetCore.Identity;
 using Vexo.Api.Middlewares;
-using Vexo.Api.Registrations;
+using Vexo.Domain.Entities;
+using Vexo.Infrastructure.Registrations;
+using Vexo.Persistence.Registrations;
+using Vexo.Persistence;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,7 +13,26 @@ builder.Services.AddOpenApi();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddControllers();
-builder.Services.AddRegistrations(builder.Configuration);
+
+builder.Services
+    .AddInfrastructure(builder.Configuration)
+    .AddPersistence(builder.Configuration);
+
+builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
+{
+    options.Password.RequireDigit = true;
+    options.Password.RequireLowercase = true;
+    options.Password.RequireUppercase = true;
+    options.Password.RequireNonAlphanumeric = true;
+    options.Password.RequiredLength = 10;
+    options.Password.RequiredUniqueChars = 4;
+
+    options.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(15);
+    options.Lockout.MaxFailedAccessAttempts = 5;
+    options.Lockout.AllowedForNewUsers = true;
+
+    options.User.RequireUniqueEmail = true;
+}).AddEntityFrameworkStores<VexoDbContext>().AddDefaultTokenProviders();
 
 var app = builder.Build();
 
