@@ -4,6 +4,7 @@ using Vexo.Domain.Entities;
 using Vexo.Infrastructure.Registrations;
 using Vexo.Persistence.Registrations;
 using Vexo.Persistence;
+using Vexo.Application.Registrations;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -16,7 +17,8 @@ builder.Services.AddControllers();
 
 builder.Services
     .AddInfrastructure(builder.Configuration)
-    .AddPersistence(builder.Configuration);
+    .AddPersistence(builder.Configuration)
+    .AddApplication();
 
 builder.Services.AddIdentity<AppUser, IdentityRole>(options =>
 {
