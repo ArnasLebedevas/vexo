@@ -71,7 +71,7 @@ public class AuthService(
         var existingUser = await userService.FindByEmailAsync(model.Email);
         if (existingUser is not null) return AppError.Conflict(ErrorMessages.EmailAlreadyExists);
 
-        var user = mapper.Map<AppUser>(model);
+        var user = mapper.Map<User>(model);
 
         var creationResult = await userService.CreateUserAsync(user, model.Password);
         if (!creationResult.Succeeded) return AppError.Validation(ErrorMessages.UserCreationFailed);

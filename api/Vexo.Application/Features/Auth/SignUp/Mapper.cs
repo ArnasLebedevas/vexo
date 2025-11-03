@@ -9,7 +9,7 @@ public class SignUpMapper : Profile
     public SignUpMapper()
     {
         CreateMap<SignUpCommand, SignUpRequestDto>();
-        CreateMap<SignUpRequestDto, AppUser>()
+        CreateMap<SignUpRequestDto, User>()
             .ForMember(dest => dest.Id, opt => opt.MapFrom(_ => Guid.NewGuid()))
             .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.Email))
             .ForMember(dest => dest.CreatedAt, opt => opt.MapFrom(_ => DateTime.UtcNow));

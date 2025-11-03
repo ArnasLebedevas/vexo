@@ -15,7 +15,7 @@ public class TokenService(IOptions<JwtSettings> options) : ITokenService
 {
     private readonly JwtSettings _jwtSettings = options.Value;
 
-    public string GenerateAccessToken(AppUser user)
+    public string GenerateAccessToken(User user)
     {
         var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_jwtSettings.Secret));
         var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
@@ -38,7 +38,7 @@ public class TokenService(IOptions<JwtSettings> options) : ITokenService
         return new JwtSecurityTokenHandler().WriteToken(token);
     }
 
-    public RefreshTokenWithPlain GenerateRefreshToken(AppUser user)
+    public RefreshTokenWithPlain GenerateRefreshToken(User user)
     {
         var randomBytes = RandomNumberGenerator.GetBytes(64);
         var plainToken = Convert.ToBase64String(randomBytes);
@@ -58,7 +58,7 @@ public class TokenService(IOptions<JwtSettings> options) : ITokenService
         return new RefreshTokenWithPlain(refreshToken, plainToken);
     }
 
-    public bool ValidateRefreshTokenHashed(AppUser user, string hashedToken)
+    public bool ValidateRefreshTokenHashed(User user, string hashedToken)
     {
         var token = user.RefreshTokens.FirstOrDefault(rt => rt.Token == hashedToken);
         return token is not null && token.IsActive;

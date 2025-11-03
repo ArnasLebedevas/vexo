@@ -10,7 +10,7 @@ public class RefreshToken : IBaseEntity
     public DateTime CreatedAt { get; set; } = DateTime.UtcNow;
 
     public required Guid UserId { get; set; }
-    public required AppUser User { get; set; }
+    public required User User { get; set; }
 
     public DateTime? RevokedAt { get; set; }
     public string? ReplacedByToken { get; set; }

@@ -5,7 +5,7 @@ namespace Vexo.Application.Interfaces.Services;
 
 public interface IUserService
 {
-    Task<AppUser?> FindByEmailAsync(string email);
-    Task<bool> CheckPasswordAsync(AppUser user, string password);
-    Task<IdentityResult> CreateUserAsync(AppUser user, string password);
+    Task<User?> FindByEmailAsync(string email);
+    Task<bool> CheckPasswordAsync(User user, string password);
+    Task<IdentityResult> CreateUserAsync(User user, string password);
 }

@@ -20,7 +20,7 @@ builder.Services
     .AddPersistence(builder.Configuration)
     .AddApplication();
 
-builder.Services.AddIdentity<AppUser, AppRole>(options =>
+builder.Services.AddIdentity<User, Role>(options =>
 {
     options.Password.RequireDigit = true;
     options.Password.RequireLowercase = true;

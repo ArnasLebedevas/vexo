@@ -5,7 +5,7 @@ using Vexo.Domain.Entities;
 
 namespace Vexo.Persistence;
 
-public class VexoDbContext(DbContextOptions<VexoDbContext> options) : IdentityDbContext<AppUser, AppRole, Guid>(options)
+public class VexoDbContext(DbContextOptions<VexoDbContext> options) : IdentityDbContext<User, Role, Guid>(options)
 {
     public DbSet<RefreshToken> RefreshTokens => Set<RefreshToken>();
 

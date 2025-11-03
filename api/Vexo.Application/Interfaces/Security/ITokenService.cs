@@ -5,7 +5,7 @@ namespace Vexo.Application.Interfaces.Security;
 
 public interface ITokenService
 {
-    string GenerateAccessToken(AppUser user);
-    RefreshTokenWithPlain GenerateRefreshToken(AppUser user);
-    bool ValidateRefreshTokenHashed(AppUser user, string refreshToken);
+    string GenerateAccessToken(User user);
+    RefreshTokenWithPlain GenerateRefreshToken(User user);
+    bool ValidateRefreshTokenHashed(User user, string refreshToken);
 }

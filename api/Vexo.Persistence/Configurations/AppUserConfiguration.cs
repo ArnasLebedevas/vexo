@@ -4,9 +4,9 @@ using Vexo.Domain.Entities;
 
 namespace Vexo.Persistence.Configurations;
 
-internal sealed class AppUserConfiguration : IEntityTypeConfiguration<AppUser>
+internal sealed class AppUserConfiguration : IEntityTypeConfiguration<User>
 {
-    public void Configure(EntityTypeBuilder<AppUser> builder)
+    public void Configure(EntityTypeBuilder<User> builder)
     {
         builder.HasIndex(u => u.NormalizedEmail).IsUnique();
 
