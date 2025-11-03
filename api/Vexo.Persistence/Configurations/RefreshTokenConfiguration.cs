@@ -19,12 +19,12 @@ internal sealed class RefreshTokenConfiguration : IEntityTypeConfiguration<Refre
                .IsRequired(false);
 
         builder.HasIndex(rt => rt.Token).IsUnique();
-        builder.HasIndex(rt => rt.AppUserId);
+        builder.HasIndex(rt => rt.UserId);
         builder.HasIndex(rt => new { rt.Token, rt.IsRevoked });
 
-        builder.HasOne(rt => rt.AppUser)
+        builder.HasOne(rt => rt.User)
                .WithMany(u => u.RefreshTokens)
-               .HasForeignKey(rt => rt.AppUserId)
+               .HasForeignKey(rt => rt.UserId)
                .OnDelete(DeleteBehavior.Cascade);
     }
 }

@@ -7,5 +7,6 @@ public static class PersistenceRegistration
 {
     public static IServiceCollection AddPersistence(this IServiceCollection services, IConfiguration configuration) =>
         services
-               .AddDatabase(configuration);
+               .AddDatabase(configuration)
+               .AddRepositories(configuration);
 }

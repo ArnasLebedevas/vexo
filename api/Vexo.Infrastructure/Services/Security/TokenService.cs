@@ -51,8 +51,8 @@ public class TokenService(IOptions<JwtSettings> options) : ITokenService
             ExpiresAt = DateTime.UtcNow.AddDays(_jwtSettings.RefreshTokenExpiryDays),
             CreatedAt = DateTime.UtcNow,
             IsRevoked = false,
-            AppUserId = user.Id,
-            AppUser = user,
+            UserId = user.Id,
+            User = user,
         };
 
         return new RefreshTokenWithPlain(refreshToken, plainToken);

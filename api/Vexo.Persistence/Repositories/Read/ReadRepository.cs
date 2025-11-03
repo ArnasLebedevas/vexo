@@ -3,7 +3,8 @@ using Vexo.Domain.Entities;
 
 namespace Vexo.Persistence.Repositories.Read;
 
-public class ReadRepository<T>(VexoDbContext context) : IReadRepository<T> where T : BaseEntity
+public class ReadRepository<T>(VexoDbContext context) : IReadRepository<T> 
+    where T : class, IBaseEntity
 {
     protected readonly VexoDbContext context = context;
 

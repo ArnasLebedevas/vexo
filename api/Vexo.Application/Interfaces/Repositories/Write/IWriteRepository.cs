@@ -2,7 +2,7 @@
 
 namespace Vexo.Application.Interfaces.Repositories.Write;
 
-public interface IWriteRepository<T> where T : BaseEntity
+public interface IWriteRepository<T> where T : IBaseEntity
 {
     Task SaveChangesAsync();
     void Add(T entity);

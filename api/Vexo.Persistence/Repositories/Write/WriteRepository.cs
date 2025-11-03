@@ -3,7 +3,8 @@ using Vexo.Domain.Entities;
 
 namespace Vexo.Persistence.Repositories.Write;
 
-public class WriteRepository<T>(VexoDbContext context) : IWriteRepository<T> where T : BaseEntity
+public class WriteRepository<T>(VexoDbContext context) : IWriteRepository<T> 
+    where T : class, IBaseEntity
 {
     protected readonly VexoDbContext context = context;
 
