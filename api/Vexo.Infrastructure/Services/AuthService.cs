@@ -1,4 +1,5 @@
-﻿using Vexo.Application.Common;
+﻿using AutoMapper;
+using Vexo.Application.Common;
 using Vexo.Application.Common.Errors;
 using Vexo.Application.Common.Messages;
 using Vexo.Application.Features.Auth.DTOs;
@@ -11,7 +12,12 @@ using Vexo.Infrastructure.Services.Security;
 
 namespace Vexo.Infrastructure.Services;
 
-public class AuthService(IUserService userService, IRefreshTokenReadRepository refreshTokenRepository, ITokenService tokenService, IUnitOfWork unitOfWork) : IAuthService
+public class AuthService(
+    IUserService userService,
+    IRefreshTokenReadRepository refreshTokenRepository,
+    ITokenService tokenService,
+    IUnitOfWork unitOfWork,
+    IMapper mapper) : IAuthService
 {
     public async Task<Result<AuthResponseDto>> SignInAsync(string email, string password)
     {
@@ -60,22 +66,14 @@ public class AuthService(IUserService userService, IRefreshTokenReadRepository r
         return new AuthResponseDto(newAccessToken, newRefreshTokenWithPlain.PlainToken);
     }
 
-    public async Task<Result<AuthResponseDto>> SignUpAsync(string email, string password, string firstName, string lastName)
+    public async Task<Result<AuthResponseDto>> SignUpAsync(SignUpRequestDto model)
     {
-        var existingUser = await userService.FindByEmailAsync(email);
+        var existingUser = await userService.FindByEmailAsync(model.Email);
         if (existingUser is not null) return AppError.Conflict(ErrorMessages.EmailAlreadyExists);
 
-        var user = new AppUser
-        {
-            Id = Guid.NewGuid(),
-            FirstName = firstName,
-            LastName = lastName,
-            Email = email,
-            UserName = email,
-            CreatedAt = DateTime.UtcNow
-        };
+        var user = mapper.Map<AppUser>(model);
 
-        var creationResult = await userService.CreateUserAsync(user, password);
+        var creationResult = await userService.CreateUserAsync(user, model.Password);
         if (!creationResult.Succeeded) return AppError.Validation(ErrorMessages.UserCreationFailed);
 
         var accessToken = tokenService.GenerateAccessToken(user);
