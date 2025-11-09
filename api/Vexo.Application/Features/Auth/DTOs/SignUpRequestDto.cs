@@ -1,6 +1,6 @@
-﻿namespace Vexo.Application.Features.Auth.DTOs;
+namespace Vexo.Application.Features.Auth.DTOs;
 
-public class SignUpRequestDto
+public sealed class SignUpRequestDto
 {
     public required string FirstName { get; set; }
     public required string LastName { get; set; }

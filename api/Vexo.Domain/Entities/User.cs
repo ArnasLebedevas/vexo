@@ -12,4 +12,13 @@ public class User : IdentityUser<Guid>, IBaseEntity
     public DateTime? LastLoginAt { get; set; }
 
     public List<RefreshToken> RefreshTokens { get; set; } = [];
+
+    public void RevokeAllActiveTokens()
+    {
+        foreach (var token in RefreshTokens.Where(rt => rt.IsActive))
+        {
+            token.IsRevoked = true;
+            token.RevokedAt = DateTime.UtcNow;
+        }
+    }
 }

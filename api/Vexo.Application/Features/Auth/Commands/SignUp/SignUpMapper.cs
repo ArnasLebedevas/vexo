@@ -1,10 +1,10 @@
-﻿using AutoMapper;
+using AutoMapper;
 using Vexo.Application.Features.Auth.DTOs;
 using Vexo.Domain.Entities;
 
-namespace Vexo.Application.Features.Auth.SignUp;
+namespace Vexo.Application.Features.Auth.Commands.SignUp;
 
-public class SignUpMapper : Profile
+internal sealed class SignUpMapper : Profile
 {
     public SignUpMapper()
     {

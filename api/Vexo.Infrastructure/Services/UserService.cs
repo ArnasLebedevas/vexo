@@ -6,9 +6,9 @@ namespace Vexo.Infrastructure.Services;
 
 public sealed class UserService(UserManager<User> userManager) : IUserService
 {
-    public async Task<User?> FindByEmailAsync(string email) => await userManager.FindByEmailAsync(email);
+    public Task<User?> FindByEmailAsync(string email) => userManager.FindByEmailAsync(email);
 
-    public async Task<bool> CheckPasswordAsync(User user, string password) => await userManager.CheckPasswordAsync(user, password);
+    public Task<bool> CheckPasswordAsync(User user, string password) => userManager.CheckPasswordAsync(user, password);
 
-    public async Task<IdentityResult> CreateUserAsync(User user, string password) => await userManager.CreateAsync(user, password);
+    public Task<IdentityResult> CreateUserAsync(User user, string? password = null) => userManager.CreateAsync(user, password ?? string.Empty);
 }

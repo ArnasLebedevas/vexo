@@ -2,6 +2,7 @@
 
 public static class ValidationMessages
 {
+    public const string IdTokenRequired = "ID token is required";
     public const string EmailRequired = "Email is required";
     public const string EmailInvalidFormat = "Invalid email format";
     public const string PasswordRequired = "Password is required";

@@ -1,9 +1,9 @@
 ﻿using FluentValidation;
 using Vexo.Application.Common.Messages;
 
-namespace Vexo.Application.Features.Auth.SignUp;
+namespace Vexo.Application.Features.Auth.Commands.SignUp;
 
-internal class SignUpValidator : AbstractValidator<SignUpCommand>
+internal sealed class SignUpValidator : AbstractValidator<SignUpCommand>
 {
     public SignUpValidator()
     {

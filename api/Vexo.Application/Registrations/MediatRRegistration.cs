@@ -1,8 +1,8 @@
 ﻿using FluentValidation;
 using MediatR;
 using Microsoft.Extensions.DependencyInjection;
-using Vexo.Application.Behaviors;
-using Vexo.Application.Features.Auth.SignIn;
+using Vexo.Application.Common.Behaviors;
+using Vexo.Application.Features.Auth.Commands.SignIn;
 
 namespace Vexo.Application.Registrations;
 

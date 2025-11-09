@@ -16,4 +16,10 @@ public class RefreshToken : IBaseEntity
     public string? ReplacedByToken { get; set; }
 
     public bool IsActive => !IsRevoked && DateTime.UtcNow < ExpiresAt;
+
+    public void RevokeActiveToken()
+    {
+        IsRevoked = true;
+        RevokedAt = DateTime.UtcNow;
+    }
 }

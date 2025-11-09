@@ -2,4 +2,4 @@
 
 namespace Vexo.Application.Features.Auth.DTOs;
 
-public record RefreshTokenWithPlain(RefreshToken TokenEntity, string PlainToken);
+public sealed record RefreshTokenWithPlain(RefreshToken TokenEntity, string PlainToken);
