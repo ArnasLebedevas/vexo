@@ -1,6 +1,8 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Vexo.Application.Features.Auth.Commands.ConfirmEmail;
 using Vexo.Application.Features.Auth.Commands.GoogleSignIn;
+using Vexo.Application.Features.Auth.Commands.ResendConfirmationEmail;
 using Vexo.Application.Features.Auth.Commands.SignIn;
 using Vexo.Application.Features.Auth.Commands.SignUp;
 using Vexo.Application.Features.Auth.Commands.Token;
@@ -18,6 +20,12 @@ public class AuthController(IMediator mediator) : BaseApiController
 
     [HttpPost("google-sign-in")]
     public async Task<IActionResult> GoogleSignIn([FromBody] GoogleSignInCommand command) => HandleResponse(await mediator.Send(command));
+
+    [HttpGet("confirm-email")]
+    public async Task<IActionResult> ConfirmEmail([FromQuery] ConfirmEmailCommand command) => HandleResponse(await mediator.Send(command));
+
+    [HttpPost("resend-confirmation-email")]
+    public async Task<IActionResult> ResendConfirmationEmail([FromBody] ResendConfirmationEmailCommand command) => HandleResponse(await mediator.Send(command));
 
     [HttpPost("refresh-token")]
     public async Task<IActionResult> RefreshToken([FromBody] RefreshTokenCommand command) => HandleResponse(await mediator.Send(command));

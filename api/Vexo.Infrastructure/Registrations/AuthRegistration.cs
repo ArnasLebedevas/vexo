@@ -12,7 +12,7 @@ internal static class AuthRegistration
 {
     public static IServiceCollection AddAuthServices(this IServiceCollection services, IConfiguration configuration)
     {
-        var jwtSettings = configuration.GetSection("JwtSettings").Get<JwtSettings>() ?? throw new InvalidOperationException(ErrorMessages.MissingJWT);
+        var jwtSettings = configuration.GetSection("Jwt").Get<JwtSettings>() ?? throw new InvalidOperationException(ErrorMessages.MissingJWT);
 
         services.AddAuthentication(options =>
         {

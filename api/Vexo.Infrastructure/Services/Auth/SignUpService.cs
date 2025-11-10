@@ -15,6 +15,7 @@ internal sealed class SignUpService(
     IUserService userService,
     ITokenService tokenService,
     IUnitOfWork unitOfWork,
+    IEmailService confirmEmailService,
     IMapper mapper) : ISignUpService
 {
     public async Task<Result<AuthResponseDto>> SignUpAsync(SignUpRequestDto model)
@@ -26,6 +27,8 @@ internal sealed class SignUpService(
 
         var creationResult = await userService.CreateUserAsync(user, model.Password);
         if (!creationResult.Succeeded) return AppError.Validation(ErrorMessages.UserCreationFailed);
+
+        await confirmEmailService.SendConfirmationEmailAsync(user);
 
         var accessToken = tokenService.GenerateAccessToken(user);
         var refreshTokenWithPlain = tokenService.GenerateRefreshToken(user);

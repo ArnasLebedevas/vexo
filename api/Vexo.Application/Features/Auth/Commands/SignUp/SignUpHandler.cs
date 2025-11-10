@@ -8,8 +8,8 @@ namespace Vexo.Application.Features.Auth.Commands.SignUp;
 
 internal sealed class SignUpHandler(ISignUpService signUpService, IMapper mapper) : ICommandHandler<SignUpCommand, AuthResponseDto>
 {
-    public Task<Result<AuthResponseDto>> Handle(SignUpCommand request, CancellationToken cancellationToken)
+    public Task<Result<AuthResponseDto>> Handle(SignUpCommand command, CancellationToken cancellationToken)
     {
-        return signUpService.SignUpAsync(mapper.Map<SignUpRequestDto>(request));
+        return signUpService.SignUpAsync(mapper.Map<SignUpRequestDto>(command));
     }
 }

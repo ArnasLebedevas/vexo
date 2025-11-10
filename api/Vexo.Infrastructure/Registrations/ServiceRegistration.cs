@@ -2,8 +2,10 @@
 using Vexo.Application.Interfaces.Security;
 using Vexo.Application.Interfaces.Services;
 using Vexo.Application.Interfaces.Services.Auth;
+using Vexo.Application.Interfaces.Services.Messaging;
 using Vexo.Infrastructure.Services;
 using Vexo.Infrastructure.Services.Auth;
+using Vexo.Infrastructure.Services.Messaging;
 using Vexo.Infrastructure.Services.Security;
 
 namespace Vexo.Infrastructure.Registrations;
@@ -18,6 +20,8 @@ internal static class ServiceRegistration
         services.AddScoped<IRefreshTokenService, RefreshTokenService>();
         services.AddScoped<ISignInService, SignInService>();
         services.AddScoped<ISignUpService, SignUpService>();
+        services.AddScoped<IEmailService, EmailService>();
+        services.AddScoped<IEmailSenderService, EmailSenderService>();
 
         return services;
     }

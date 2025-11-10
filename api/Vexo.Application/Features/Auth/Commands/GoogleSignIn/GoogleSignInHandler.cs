@@ -7,8 +7,8 @@ namespace Vexo.Application.Features.Auth.Commands.GoogleSignIn;
 
 internal sealed class GoogleSignInHandler(ISignInService signInService) : ICommandHandler<GoogleSignInCommand, AuthResponseDto>
 {
-    public Task<Result<AuthResponseDto>> Handle(GoogleSignInCommand request, CancellationToken cancellationToken)
+    public Task<Result<AuthResponseDto>> Handle(GoogleSignInCommand command, CancellationToken cancellationToken)
     {
-        return signInService.GoogleSignInAsync(request.IdToken);
+        return signInService.GoogleSignInAsync(command.IdToken);
     }
 }

@@ -8,7 +8,9 @@ internal static class SettingRegistration
 {
     public static IServiceCollection AddSettings(this IServiceCollection services, IConfiguration configuration)
     {
-        services.Configure<JwtSettings>(configuration.GetSection("JwtSettings"));
+        services.Configure<JwtSettings>(configuration.GetSection("Jwt"));
+        services.Configure<EmailSettings>(configuration.GetSection("Email"));
+        services.Configure<AppSettings>(configuration.GetSection("App"));
 
         return services;
     }
