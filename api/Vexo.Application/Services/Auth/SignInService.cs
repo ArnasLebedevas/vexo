@@ -10,9 +10,9 @@ using Vexo.Application.Interfaces.Services;
 using Vexo.Application.Interfaces.Services.Auth;
 using Vexo.Domain.Entities;
 
-namespace Vexo.Infrastructure.Services.Auth;
+namespace Vexo.Application.Services.Auth;
 
-internal sealed class SignInService(
+public sealed class SignInService(
     IUserService userService,
     ITokenService tokenService,
     IUnitOfWork unitOfWork,
@@ -22,6 +22,8 @@ internal sealed class SignInService(
     {
         var user = await userService.FindByEmailAsync(email);
         if (user is null) return AppError.Unauthorized(ErrorMessages.InvalidCredentials);
+
+        if (!user.EmailConfirmed) return AppError.Unauthorized(ErrorMessages.InvalidCredentials);
 
         var isPasswordValid = await userService.CheckPasswordAsync(user, password);
         if (!isPasswordValid) return AppError.Unauthorized(ErrorMessages.InvalidCredentials);

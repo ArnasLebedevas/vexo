@@ -10,12 +10,12 @@ internal sealed class AppRoleConfiguration : IEntityTypeConfiguration<Role>
     public void Configure(EntityTypeBuilder<Role> builder)
     {
         builder.Property(r => r.RoleType)
-                .HasConversion<string>()
-                .IsRequired();
+            .HasConversion<string>()
+            .IsRequired();
 
         builder.Property(r => r.NormalizedName)
-               .IsRequired()
-               .HasMaxLength(256);
+            .IsRequired()
+            .HasMaxLength(256);
 
         builder.HasData(RoleSeedData.GetSeedData());
     }

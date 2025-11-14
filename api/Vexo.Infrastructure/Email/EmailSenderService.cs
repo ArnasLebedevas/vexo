@@ -4,9 +4,9 @@ using System.Net.Mail;
 using Vexo.Application.Common.Settings;
 using Vexo.Application.Interfaces.Services.Messaging;
 
-namespace Vexo.Infrastructure.Services.Messaging;
+namespace Vexo.Infrastructure.Email;
 
-internal sealed class EmailSenderService(IOptions<EmailSettings> options) : IEmailSenderService
+public sealed class EmailSenderService(IOptions<EmailSettings> options) : IEmailSenderService
 {
     private readonly EmailSettings _settings = options.Value;
 

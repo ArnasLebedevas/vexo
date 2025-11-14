@@ -1,10 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
+using Vexo.Persistence;
 
-namespace Vexo.Persistence.Registrations;
+namespace Vexo.Api.DependencyInjection.Persistence;
 
-internal static class DatabaseRegistration
+internal static class DbContextRegistration
 {
     public static IServiceCollection AddDatabase(this IServiceCollection services, IConfiguration configuration)
     {

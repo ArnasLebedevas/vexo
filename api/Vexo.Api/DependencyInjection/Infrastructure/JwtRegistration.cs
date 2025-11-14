@@ -1,16 +1,14 @@
 ﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using Vexo.Application.Common.Messages;
 using Vexo.Application.Common.Settings;
 
-namespace Vexo.Infrastructure.Registrations;
+namespace Vexo.Api.DependencyInjection.Infrastructure;
 
-internal static class AuthRegistration
+internal static class JwtRegistration
 {
-    public static IServiceCollection AddAuthServices(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddJwtServices(this IServiceCollection services, IConfiguration configuration)
     {
         var jwtSettings = configuration.GetSection("Jwt").Get<JwtSettings>() ?? throw new InvalidOperationException(ErrorMessages.MissingJWT);
 

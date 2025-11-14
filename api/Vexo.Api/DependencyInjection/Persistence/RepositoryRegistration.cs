@@ -1,17 +1,15 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Vexo.Application.Interfaces.Repositories;
+﻿using Vexo.Application.Interfaces.Repositories;
 using Vexo.Application.Interfaces.Repositories.Read;
 using Vexo.Application.Interfaces.Repositories.Write;
 using Vexo.Persistence.Repositories;
 using Vexo.Persistence.Repositories.Read;
 using Vexo.Persistence.Repositories.Write;
 
-namespace Vexo.Persistence.Registrations;
+namespace Vexo.Api.DependencyInjection.Persistence;
 
 internal static class RepositoryRegistration
 {
-    public static IServiceCollection AddRepositories(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection AddRepositories(this IServiceCollection services)
     {
         services.AddScoped(typeof(IReadRepository<>), typeof(ReadRepository<>));
         services.AddScoped(typeof(IWriteRepository<>), typeof(WriteRepository<>));

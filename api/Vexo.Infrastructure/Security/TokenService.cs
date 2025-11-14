@@ -4,12 +4,13 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
+using Vexo.Application.Common.Security;
 using Vexo.Application.Common.Settings;
 using Vexo.Application.Features.Auth.DTOs;
 using Vexo.Application.Interfaces.Security;
 using Vexo.Domain.Entities;
 
-namespace Vexo.Infrastructure.Services.Security;
+namespace Vexo.Infrastructure.Security;
 
 public class TokenService(IOptions<JwtSettings> options) : ITokenService
 {

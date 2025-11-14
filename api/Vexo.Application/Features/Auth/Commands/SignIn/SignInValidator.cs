@@ -3,7 +3,7 @@ using Vexo.Application.Common.Messages;
 
 namespace Vexo.Application.Features.Auth.Commands.SignIn;
 
-internal sealed class SignInValidator : AbstractValidator<SignInCommand>
+public sealed class SignInValidator : AbstractValidator<SignInCommand>
 {
     public SignInValidator()
     {

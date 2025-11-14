@@ -1,16 +1,16 @@
 ﻿using Vexo.Application.Common;
 using Vexo.Application.Common.Errors;
 using Vexo.Application.Common.Messages;
+using Vexo.Application.Common.Security;
 using Vexo.Application.Features.Auth.DTOs;
 using Vexo.Application.Interfaces.Repositories;
 using Vexo.Application.Interfaces.Repositories.Read;
 using Vexo.Application.Interfaces.Security;
 using Vexo.Application.Interfaces.Services.Auth;
-using Vexo.Infrastructure.Services.Security;
 
-namespace Vexo.Infrastructure.Services.Auth;
+namespace Vexo.Application.Services.Auth;
 
-internal sealed class RefreshTokenService(
+public sealed class RefreshTokenService(
     IRefreshTokenReadRepository refreshTokenRepository,
     ITokenService tokenService,
     IUnitOfWork unitOfWork) : IRefreshTokenService

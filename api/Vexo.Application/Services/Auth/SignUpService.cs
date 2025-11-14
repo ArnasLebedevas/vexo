@@ -9,9 +9,9 @@ using Vexo.Application.Interfaces.Services;
 using Vexo.Application.Interfaces.Services.Auth;
 using Vexo.Domain.Entities;
 
-namespace Vexo.Infrastructure.Services.Auth;
+namespace Vexo.Application.Services.Auth;
 
-internal sealed class SignUpService(
+public sealed class SignUpService(
     IUserService userService,
     ITokenService tokenService,
     IUnitOfWork unitOfWork,

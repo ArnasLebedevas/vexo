@@ -1,21 +1,21 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.WebUtilities;
 using Microsoft.Extensions.Options;
-using System.Text;
 using Vexo.Application.Common;
 using Vexo.Application.Common.Errors;
 using Vexo.Application.Common.Messages;
 using Vexo.Application.Common.Settings;
+using Vexo.Application.Interfaces.Security;
 using Vexo.Application.Interfaces.Services;
 using Vexo.Application.Interfaces.Services.Auth;
 using Vexo.Application.Interfaces.Services.Messaging;
 using Vexo.Domain.Entities;
 
-namespace Vexo.Infrastructure.Services.Auth;
+namespace Vexo.Application.Services.Auth;
 
-internal sealed class EmailService(
+public sealed class EmailService(
     IUserService userService,
     IEmailSenderService emailSenderService,
+    IUrlTokenEncoder urlTokenEncoder,
     IOptions<AppSettings> appSettings) : IEmailService
 {
     private readonly AppSettings _appSettings = appSettings.Value;
@@ -25,7 +25,7 @@ internal sealed class EmailService(
         if (user.Email is null || user.EmailConfirmed) return;
 
         var token = await userService.GenerateEmailConfirmationTokenAsync(user);
-        var encodedToken = WebEncoders.Base64UrlEncode(Encoding.UTF8.GetBytes(token));
+        var encodedToken = urlTokenEncoder.Encode(token);
         var confirmLink = $"{_appSettings.BaseUrl}/api/auth/confirm-email?userId={user.Id}&token={encodedToken}";
 
         var subject = "Confirm your email";
@@ -39,7 +39,7 @@ internal sealed class EmailService(
         var user = await userService.FindByIdAsync(userId);
         if (user is null) return AppError.NotFound(ErrorMessages.UserNotFound);
 
-        var decoded = Encoding.UTF8.GetString(WebEncoders.Base64UrlDecode(token));
+        var decoded = urlTokenEncoder.Decode(token);
         var result = await userService.ConfirmUserEmailAsync(user, decoded);
 
         return result.Succeeded ? Unit.Value : AppError.Validation(ErrorMessages.InvalidEmailConfirmationToken);

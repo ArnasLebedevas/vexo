@@ -1,7 +1,7 @@
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Vexo.Infrastructure.Services.Security;
+namespace Vexo.Application.Common.Security;
 
 public static class TokenHashing
 {

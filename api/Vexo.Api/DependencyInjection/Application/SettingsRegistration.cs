@@ -1,10 +1,8 @@
-﻿using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Vexo.Application.Common.Settings;
+﻿using Vexo.Application.Common.Settings;
 
-namespace Vexo.Infrastructure.Registrations;
+namespace Vexo.Api.DependencyInjection.Application;
 
-internal static class SettingRegistration
+internal static class SettingsRegistration
 {
     public static IServiceCollection AddSettings(this IServiceCollection services, IConfiguration configuration)
     {

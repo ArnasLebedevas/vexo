@@ -1,14 +1,13 @@
 ﻿using FluentValidation;
 using MediatR;
-using Microsoft.Extensions.DependencyInjection;
 using Vexo.Application.Common.Behaviors;
 using Vexo.Application.Features.Auth.Commands.SignIn;
 
-namespace Vexo.Application.Registrations;
+namespace Vexo.Api.DependencyInjection.Application;
 
-internal static class MediatRRegistration
+internal static class MediatorRegistration
 {
-    public static IServiceCollection AddMediatRServices(this IServiceCollection services)
+    public static IServiceCollection AddMediator(this IServiceCollection services)
     {
         services.AddMediatR(cfg => cfg.RegisterServicesFromAssembly(typeof(SignInCommand).Assembly));
         services.AddValidatorsFromAssemblyContaining<SignInValidator>();

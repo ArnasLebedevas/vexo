@@ -14,6 +14,7 @@ public static class ErrorMessages
     public const string UserNotFound = "User not found.";
     public const string InvalidEmailConfirmationToken = "Invalid email confirmation token.";
     public const string EmailAlreadyConfirmed = "Email is already confirmed.";
+    public const string EmailNotConfirmed = "Email is not confirmed.";
 
     public static string NotFound(string entity) => $"{entity} was not found.";
 }

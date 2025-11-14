@@ -8,4 +8,6 @@ public static class ValidationMessages
     public const string PasswordRequired = "Password is required";
     public const string PasswordLength = "Password must be at least 8 characters long";
     public const string RefreshTokenRequired = "Refresh token is required.";
+    public const string TokenRequired = "Token is required.";
+    public const string UserIdRequired = "User ID is required.";
 }

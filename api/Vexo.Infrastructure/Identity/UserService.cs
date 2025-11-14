@@ -2,9 +2,9 @@
 using Vexo.Application.Interfaces.Services;
 using Vexo.Domain.Entities;
 
-namespace Vexo.Infrastructure.Services;
+namespace Vexo.Infrastructure.Identity;
 
-internal sealed class UserService(UserManager<User> userManager) : IUserService
+public sealed class UserService(UserManager<User> userManager) : IUserService
 {
     public Task<User?> FindByIdAsync(Guid id) => userManager.FindByIdAsync(id.ToString());
 
