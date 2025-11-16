@@ -3,6 +3,8 @@
 public enum CoinStatus
 {
     Draft = 0,
-    Published = 1,
-    Archived = 2
+    Active = 1,
+    Inactive = 2,
+    Archived = 3,
+    PendingApproval = 4
 }

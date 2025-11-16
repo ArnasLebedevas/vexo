@@ -8,7 +8,7 @@ using Vexo.Application.Interfaces.Repositories.Read;
 using Vexo.Application.Interfaces.Security;
 using Vexo.Application.Interfaces.Services.Auth;
 
-namespace Vexo.Application.Services.Auth;
+namespace Vexo.Application.Features.Auth.Services;
 
 public sealed class RefreshTokenService(
     IRefreshTokenReadRepository refreshTokenRepository,

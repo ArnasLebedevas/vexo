@@ -24,6 +24,18 @@ internal sealed class CoinConfiguration : IEntityTypeConfiguration<Coin>
         builder.Property(c => c.Description)
             .HasMaxLength(2000);
 
+        builder.Property(c => c.Blockchain)
+            .HasMaxLength(100);
+
+        builder.Property(c => c.WebsiteUrl)
+            .HasMaxLength(500);
+
+        builder.Property(c => c.WhitepaperUrl)
+            .HasMaxLength(500);
+
+        builder.Property(c => c.Network)
+            .HasMaxLength(100);
+
         builder.Property(c => c.Status)
             .HasConversion<string>()
             .HasMaxLength(50)

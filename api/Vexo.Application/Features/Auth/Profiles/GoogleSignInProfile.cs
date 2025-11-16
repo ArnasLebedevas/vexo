@@ -3,11 +3,11 @@ using Google.Apis.Auth;
 using Vexo.Application.Features.Auth.DTOs;
 using Vexo.Domain.Entities;
 
-namespace Vexo.Application.Features.Auth.Commands.GoogleSignIn;
+namespace Vexo.Application.Features.Auth.Profiles;
 
-internal sealed class GoogleSignInMapper : Profile
+internal sealed class GoogleSignInProfile : Profile
 {
-    public GoogleSignInMapper()
+    public GoogleSignInProfile()
     {
         CreateMap<GoogleJsonWebSignature.Payload, GoogleUserDto>()
             .ForMember(dest => dest.Email, opt => opt.MapFrom(src => src.Email))

@@ -10,7 +10,7 @@ using Vexo.Application.Interfaces.Services;
 using Vexo.Application.Interfaces.Services.Auth;
 using Vexo.Domain.Entities;
 
-namespace Vexo.Application.Services.Auth;
+namespace Vexo.Application.Features.Auth.Services;
 
 public sealed class SignInService(
     IUserService userService,

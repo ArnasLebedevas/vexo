@@ -5,7 +5,7 @@ public static class ApplicationRegistration
     public static IServiceCollection AddApplication(this IServiceCollection services, IConfiguration configuration) =>
         services
                .AddMediator()
-               .AddMapper()
+               .AddProfiles()
                .AddSettings(configuration)
                .AddApplicationServices();
 }
