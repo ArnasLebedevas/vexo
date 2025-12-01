@@ -13,6 +13,10 @@ public static class ExceptionMapper
                 ErrorType.Validation,
                 ex.Errors?.ToDictionary(error => error.Key, error => error.Value)
             ),
+            BadRequestException ex => Result<object>.Failure(
+              AppError.BadRequest(ex.Message),
+              ErrorType.BadRequest
+            ),
             UnauthorizedAccessException ex => Result<object>.Failure(
                 AppError.Unauthorized(ex.Message),
                 ErrorType.Unauthorized

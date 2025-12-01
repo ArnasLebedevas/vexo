@@ -12,9 +12,9 @@ using Vexo.Domain.Entities;
 
 namespace Vexo.Infrastructure.Security;
 
-public class TokenService(IOptions<JwtSettings> options) : ITokenService
+public class TokenService(IOptions<AuthSettings> options) : ITokenService
 {
-    private readonly JwtSettings _jwtSettings = options.Value;
+    private readonly JwtSettings _jwtSettings = options.Value.Jwt;
 
     public string GenerateAccessToken(User user)
     {

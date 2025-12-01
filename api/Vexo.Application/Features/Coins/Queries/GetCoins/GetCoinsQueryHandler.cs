@@ -6,10 +6,8 @@ using Vexo.Application.Interfaces.Services.Coins;
 
 namespace Vexo.Application.Features.Coins.Queries.GetCoins;
 
-internal class GetCoinsQueryHandler(ICoinReadService coinReadService) : IQueryHandler<GetCoinsQuery, PagedResult<CoinDto>>
+internal sealed class GetCoinsQueryHandler(ICoinReadService coinReadService) : IQueryHandler<GetCoinsQuery, PagedResult<CoinDto>>
 {
-    public Task<Result<PagedResult<CoinDto>>> Handle(GetCoinsQuery request, CancellationToken cancellationToken)
-    {
-        return coinReadService.GetPagedCoinsAsync(request.PageNumber, request.PageSize);
-    }
+    public Task<Result<PagedResult<CoinDto>>> Handle(GetCoinsQuery query, CancellationToken cancellationToken) =>
+        coinReadService.GetPagedCoinsAsync(query.PageNumber, query.PageSize);
 }

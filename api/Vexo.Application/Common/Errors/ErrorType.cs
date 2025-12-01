@@ -8,5 +8,6 @@ public enum ErrorType
     NotFound,
     Unauthorized,
     Conflict,
+    BadRequest,
     System,
 }

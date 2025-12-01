@@ -2,7 +2,7 @@
 using System.Net;
 using System.Net.Mail;
 using Vexo.Application.Common.Settings;
-using Vexo.Application.Interfaces.Services.Messaging;
+using Vexo.Application.Interfaces.Messaging;
 
 namespace Vexo.Infrastructure.Email;
 

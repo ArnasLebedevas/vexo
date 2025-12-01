@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="9.0.10" />
+    <PackageReference Include="RazorLight" Version="2.3.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -15,4 +16,7 @@
     <ProjectReference Include="..\Vexo.Domain\Vexo.Domain.csproj" />
   </ItemGroup>
 
+	<ItemGroup>
+		<EmbeddedResource Include="Email/Templates/*.cshtml" />
+	</ItemGroup>
 </Project>

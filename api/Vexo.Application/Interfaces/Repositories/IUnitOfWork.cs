@@ -6,6 +6,7 @@ namespace Vexo.Application.Interfaces.Repositories;
 public interface IUnitOfWork
 {
     IWriteRepository<RefreshToken> RefreshTokens { get; }
+    IWriteRepository<LoginCode> LoginCodes { get; }
 
     Task SaveChangesAsync();
 }

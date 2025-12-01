@@ -8,7 +8,5 @@ namespace Vexo.Application.Features.Auth.Commands.Token;
 internal sealed class RefreshTokenHandler(IRefreshTokenService refreshTokenService) : ICommandHandler<RefreshTokenCommand, AuthResponseDto>
 {
     public Task<Result<AuthResponseDto>> Handle(RefreshTokenCommand command, CancellationToken cancellationToken)
-    {
-        return refreshTokenService.RefreshTokenAsync(command.RefreshToken);
-    }
+        => refreshTokenService.RefreshTokenAsync(command.RefreshToken);
 }

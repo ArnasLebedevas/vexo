@@ -1,59 +1,27 @@
-﻿using MediatR;
-using Microsoft.Extensions.Options;
-using Vexo.Application.Common;
-using Vexo.Application.Common.Errors;
-using Vexo.Application.Common.Messages;
-using Vexo.Application.Common.Settings;
-using Vexo.Application.Interfaces.Security;
+﻿using Vexo.Application.Common.Email;
+using Vexo.Application.Common.Models;
+using Vexo.Application.Interfaces.Messaging;
 using Vexo.Application.Interfaces.Services;
 using Vexo.Application.Interfaces.Services.Auth;
-using Vexo.Application.Interfaces.Services.Messaging;
 using Vexo.Domain.Entities;
 
 namespace Vexo.Application.Features.Auth.Services;
 
 public sealed class EmailService(
-    IUserService userService,
-    IEmailSenderService emailSenderService,
-    IUrlTokenEncoder urlTokenEncoder,
-    IOptions<AppSettings> appSettings) : IEmailService
+    IEmailSenderService emailSender,
+    IEmailTemplateRenderer template,
+    IUrlBuilderService urlBuilder) : IEmailService
 {
-    private readonly AppSettings _appSettings = appSettings.Value;
-
-    public async Task SendConfirmationEmailAsync(User user)
+    public async Task SendLoginCodeEmail(User user, string code)
     {
-        if (user.Email is null || user.EmailConfirmed) return;
+        if (user.Email is null) return;
 
-        var token = await userService.GenerateEmailConfirmationTokenAsync(user);
-        var encodedToken = urlTokenEncoder.Encode(token);
-        var confirmLink = $"{_appSettings.BaseUrl}/api/auth/confirm-email?userId={user.Id}&token={encodedToken}";
+        var loginUrl = urlBuilder.BuildPasswordlessLoginUrl(user.Email, code);
 
-        var subject = "Confirm your email";
-        var body = $"<p>Click <a href=\"{confirmLink}\">here</a> to confirm your email.</p>";
+        var model = new LoginCodeEmailModel(user.Email, code, loginUrl);
 
-        await emailSenderService.SendEmailAsync(user.Email, subject, body);
-    }
+        var html = await template.RenderAsync(EmailTemplates.LoginCode, model);
 
-    public async Task<Result<Unit>> ConfirmEmailAsync(Guid userId, string token)
-    {
-        var user = await userService.FindByIdAsync(userId);
-        if (user is null) return AppError.NotFound(ErrorMessages.UserNotFound);
-
-        var decoded = urlTokenEncoder.Decode(token);
-        var result = await userService.ConfirmUserEmailAsync(user, decoded);
-
-        return result.Succeeded ? Unit.Value : AppError.Validation(ErrorMessages.InvalidEmailConfirmationToken);
-    }
-
-    public async Task<Result<Unit>> ResendConfirmationEmailAsync(Guid userId)
-    {
-        var user = await userService.FindByIdAsync(userId);
-
-        if (user is null) return AppError.NotFound(ErrorMessages.UserNotFound);
-        if (user.EmailConfirmed) return AppError.Conflict(ErrorMessages.EmailAlreadyConfirmed);
-
-        await SendConfirmationEmailAsync(user);
-
-        return Unit.Value;
+        await emailSender.SendEmailAsync(user.Email, EmailSubjects.LoginCode, html);
     }
 }

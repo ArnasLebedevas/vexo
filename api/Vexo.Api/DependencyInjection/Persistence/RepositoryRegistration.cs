@@ -17,6 +17,7 @@ internal static class RepositoryRegistration
         services.AddScoped<IUnitOfWork, UnitOfWork>();
         services.AddScoped<IRefreshTokenReadRepository, RefreshTokenReadRepository>();
         services.AddScoped<ICoinReadRepository, CoinReadRepository>();
+        services.AddScoped<ILoginCodeReadRepository, LoginCodeReadRepository>();
 
         return services;
     }

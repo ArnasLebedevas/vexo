@@ -8,6 +8,7 @@ namespace Vexo.Persistence;
 public class VexoDbContext(DbContextOptions<VexoDbContext> options) : IdentityDbContext<User, Role, Guid>(options)
 {
     public DbSet<RefreshToken> RefreshTokens => Set<RefreshToken>();
+    public DbSet<LoginCode> LoginCodes => Set<LoginCode>();
     public DbSet<Coin> Coins => Set<Coin>();
 
     protected override void OnModelCreating(ModelBuilder builder)
